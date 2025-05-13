@@ -1,0 +1,52 @@
+To check if your React frontend works properly with your ASP.NET backend, follow these steps:
+
+1. First, start your ASP.NET backend:
+   - Navigate to your SHMS backend folder
+   - Run the backend using:
+     ```
+     dotnet run
+     ```
+   - Note the URL where your API is running (usually http://localhost:5000)
+
+2. Update your API URL in the React app:
+   - In `client/src/services/api.js`, the API URL is set to:
+     ```javascript
+     const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+     ```
+   - If your backend runs on a different URL, create a `.env` file in the client folder with:
+     ```
+     REACT_APP_API_URL=http://your-backend-url/api
+     ```
+
+3. Start your React frontend:
+   - Navigate to the client folder
+   - Run:
+     ```
+     npm start
+     ```
+   - Or double-click the `start.bat` file you created
+
+4. Test the connection:
+   - Open the React app (http://localhost:3000)
+   - Try to register a new user
+   - Check browser console (F12) for any API errors
+   - If registration works, try logging in
+   - If login works, you should be redirected to the appropriate dashboard based on user role
+
+5. Verify API requests in browser:
+   - Open browser developer tools (F12)
+   - Go to Network tab
+   - Look for API requests to your backend
+   - Successful requests should return status 200-299
+
+If you encounter connection issues:
+- Check that your backend is running and accessible
+- Verify CORS is enabled on your ASP.NET backend
+- Ensure API endpoints match what your React frontend expects
+- Check for any JWT token issues in browser console
+
+For detailed debugging, you can add temporary log statements in your API service:
+```javascript
+console.log('API URL:', API_URL);
+console.log('Making request to:', `${API_URL}/endpoint`);
+```
